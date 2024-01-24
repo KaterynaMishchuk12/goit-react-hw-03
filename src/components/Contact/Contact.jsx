@@ -1,5 +1,6 @@
 import { BiSolidUser } from "react-icons/bi";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import css from "./Contact.module.css";
 
 export const Contact = ({ name, number, id }, onDeleteBtn) => {
   const handleDeleteBtn = () => {
@@ -8,15 +9,21 @@ export const Contact = ({ name, number, id }, onDeleteBtn) => {
 
   return (
     <li>
-      <div>
-        <BiSolidUser />
-        <p>{name}</p>
-        <BsFillTelephoneFill />
-        <p>{number}</p>
+      <div className={css.container}>
+        <div className={css.contactInfo}>
+          <p>
+            <BiSolidUser className={css.icon} />
+            {name}
+          </p>
+          <p>
+            <BsFillTelephoneFill className={css.icon} />
+            {number}
+          </p>
+        </div>
+        <button type="button" onClick={handleDeleteBtn}>
+          Delete
+        </button>
       </div>
-      <button type="button" onClick={handleDeleteBtn}>
-        Delete
-      </button>
     </li>
   );
 };
