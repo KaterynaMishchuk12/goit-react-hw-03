@@ -35,13 +35,11 @@ export function App() {
     });
   };
 
-  //// не працює деліт контакта
   const deleteContact = (userId) => {
     setContacts((prevContacts) =>
       prevContacts.filter((contact) => contact.id !== userId)
     );
   };
-  /////////////////////////////////////
 
   const searchedContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(inputValue.toLowerCase())

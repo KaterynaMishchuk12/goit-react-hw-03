@@ -9,7 +9,10 @@ const ContactSchema = Yup.object().shape({
     .min(3, "Too short!")
     .max(50, "Too long!")
     .required("Required"),
-  number: Yup.number().positive().min(3, "Too short").required("Required"),
+  number: Yup.number()
+    .positive()
+    .min(3, "Too short!")
+    .required("Please, fill in the number"),
 });
 
 const initialValues = {
@@ -40,11 +43,12 @@ export const ContactForm = ({ onAddContact }) => {
       <Form className={css.form}>
         <label htmlFor={nameFieldId}>Name</label>
         <Field type="text" name="name" id={nameFieldId} />
-        <ErrorMessage name="name" as="span" />
+        <ErrorMessage className={css.error} name="name" as="span" />
 
         <label htmlFor={numberFieldId}>Number</label>
         <Field type="number" name="number" id={numberFieldId} />
-        <ErrorMessage name="number" as="span" />
+        <ErrorMessage className={css.error} name="number" as="span" />
+
         <button type="submit">Add contact</button>
       </Form>
     </Formik>
