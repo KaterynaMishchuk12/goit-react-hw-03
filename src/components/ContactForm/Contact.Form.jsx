@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useId } from "react";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
@@ -9,16 +9,15 @@ const ContactSchema = Yup.object().shape({
     .min(3, "Too short!")
     .max(50, "Too long!")
     .required("Required"),
-  number: Yup.number().positive().min(10, "Too short").required("Required"),
+  number: Yup.number().positive().min(3, "Too short").required("Required"),
 });
 
 const initialValues = {
   name: "",
   number: "",
-  id: "",
 };
 
-export const ContactForm = ({ onSubmitContact }) => {
+export const ContactForm = ({ onAddContact }) => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
@@ -28,7 +27,7 @@ export const ContactForm = ({ onSubmitContact }) => {
       number: values.number,
       id: nanoid(),
     };
-    onSubmitContact(newContact);
+    onAddContact(newContact);
     actions.resetForm();
   };
 
@@ -41,9 +40,11 @@ export const ContactForm = ({ onSubmitContact }) => {
       <Form className={css.form}>
         <label htmlFor={nameFieldId}>Name</label>
         <Field type="text" name="name" id={nameFieldId} />
+        <ErrorMessage name="name" as="span" />
 
         <label htmlFor={numberFieldId}>Number</label>
         <Field type="number" name="number" id={numberFieldId} />
+        <ErrorMessage name="number" as="span" />
         <button type="submit">Add contact</button>
       </Form>
     </Formik>
