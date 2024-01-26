@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import * as Yup from "yup";
 import { ContactForm } from "./ContactForm/Contact.Form";
 import { SearchBox } from "./SearchBox/SearchBox";
 import { ContactList } from "./ContactList/ContactList";
@@ -15,11 +14,6 @@ export function App() {
 
   const [contacts, setContacts] = useState(savedContacts);
   const [inputValue, setInputValue] = useState("");
-
-  // useEffect(() => {
-  //   const savedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  //   setContacts(savedContacts);
-  // }, []);
 
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
