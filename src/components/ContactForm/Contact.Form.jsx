@@ -9,7 +9,7 @@ const ContactSchema = Yup.object().shape({
     .min(3, "Too short!")
     .max(50, "Too long!")
     .required("Required"),
-  number: Yup.number()
+  number: Yup.string()
     .min(3, "Too short!")
     .max(15, "Too long!")
     .required("Please, fill in the number"),
@@ -26,8 +26,7 @@ export const ContactForm = ({ onAddContact }) => {
 
   const handleSubmit = (values, actions) => {
     const newContact = {
-      name: values.name,
-      number: values.number,
+      ...values,
       id: nanoid(),
     };
     onAddContact(newContact);
@@ -46,7 +45,7 @@ export const ContactForm = ({ onAddContact }) => {
         <ErrorMessage className={css.error} name="name" component="span" />
 
         <label htmlFor={numberFieldId}>Number</label>
-        <Field type="tel" name="number" id={numberFieldId} />
+        <Field type="text" name="number" id={numberFieldId} />
         <ErrorMessage className={css.error} name="number" component="span" />
 
         <button className={css.button} type="submit">
